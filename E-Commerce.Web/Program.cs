@@ -17,7 +17,7 @@ namespace E_Commerce.Web
     {
         public static async Task Main(string[] args)
         {
-            #region Program code
+            #region Program Code
             var builder = WebApplication.CreateBuilder(args);
 
 
