@@ -17,6 +17,7 @@ namespace E_Commerce.Web
     {
         public static async Task Main(string[] args)
         {
+            #region Program Code
             var builder = WebApplication.CreateBuilder(args);
 
 
@@ -26,21 +27,21 @@ namespace E_Commerce.Web
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<StoreDbContext>(options=>
+            builder.Services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(ServicesAssemblyReference).Assembly);
-            builder.Services.AddScoped<IProductService,ProductService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
             #endregion
 
             var app = builder.Build();
 
             #region Data Seeding
-           await app.MigrateDatabaseAsync();
-          await app.SeedDatabaseAsync();
+            await app.MigrateDatabaseAsync();
+            await app.SeedDatabaseAsync();
             #endregion
 
 
@@ -54,10 +55,11 @@ namespace E_Commerce.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.MapControllers(); 
+            app.MapControllers();
             #endregion
 
-           await app.RunAsync();
+            await app.RunAsync(); 
+            #endregion
         }
     }
 }
